@@ -3,9 +3,11 @@ html
   head
     title= title
     link(rel='stylesheet', href='/css/style.css')
-    link(rel='stylesheet', href='/lib/fontawesome-5.11.2/css/fa.css')
-    link(rel='stylesheet', href='/lib/bootstrap-4.4.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
   body
-    .container.text-center(role='main')
+    .container(role='main')
       block content
+    script(src='https://kit.fontawesome.com/30d82b63a3.js', crossorigin='anonymous')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')
     script(src='/js/site.js')

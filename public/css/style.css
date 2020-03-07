@@ -60,3 +60,7 @@ span.dotnet {
     -o-transition: color 200ms linear;
     transition: color 200ms linear;
 }
+
+.smaller {
+    font-size: 0.75rem;
+}
