@@ -9,10 +9,11 @@ var app = require('../app');
 var debug = require('debug')('idanscott.co.uk:server');
 var http = require('http');
 var https = require('https');
-var privateKey = fs.readFileSync(process.env.SSL_PRIVATE_KEY_PATH || 'sslcert/server.key', 'utf8');
-var certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH || 'sslcert/server.crt', 'utf8');
+var privateKey = fs.readFileSync(process.env.SSL_PRIVATE_KEY_PATH || 'sslcert/privkey.pem', 'utf8');
+var certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH || 'sslcert/cert.pem', 'utf8');
+var chain = fs.readFileSync(process.env.SSL_CHAIN_PATH || 'sslcert/chain.pem', 'utf8');
 
-var credentials = {key: privateKey, cert: certificate};
+var credentials = {key: privateKey, cert: certificate, ca: chain};
 
 /**
  * Get port from environment and store in Express.
