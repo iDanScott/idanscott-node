@@ -9,6 +9,7 @@ var app = require('../app');
 var debug = require('debug')('idanscott.co.uk:server');
 var http = require('http');
 var https = require('https');
+require('dotenv').config();
 var privateKey = fs.readFileSync(process.env.SSL_PRIVATE_KEY_PATH || 'sslcert/privkey.pem', 'utf8');
 var certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH || 'sslcert/cert.pem', 'utf8');
 var chain = fs.readFileSync(process.env.SSL_CHAIN_PATH || 'sslcert/chain.pem', 'utf8');
