@@ -30,7 +30,7 @@
   
     function addEventListeners() {
       window.addEventListener("resize", function() {
-        var container = document.querySelector(".container");
+        var container = document.querySelector(".vertical-center");
         container.style.paddingTop = window.innerHeight / 2 - container.offsetHeight / 2 + "px";
       });
     };
