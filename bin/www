@@ -27,7 +27,7 @@ if (process.env.SSL_CHAIN_PATH) {
 }
 
 var credentials = null; 
-if (privateKey && certificate && ca) {
+if (privateKey && certificate && chain) {
   credentials = {key: privateKey, cert: certificate, ca: chain};
 }
 
