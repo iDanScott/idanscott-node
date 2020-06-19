@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/dialogflow-converter', function(req, res, next) {
-  res.render('dialogflowConverter', { title: 'Dan Scott Software Engineer' });
+  res.render('dialogFlowConverter', { title: 'Dan Scott Software Engineer' });
 });
 
 module.exports = router;
