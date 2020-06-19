@@ -1,0 +1,61 @@
+extends layout
+
+block content
+    form 
+        .card 
+            h5.card-header 
+                | Dialogflow File Format Converter
+            .card-body
+                .form-group
+                    label(for='txtInputJson').form-label Input JSON
+                    textarea.form-control#txtInputJson 
+                .form-group
+                    .row 
+                        .col-lg-6 
+                            label.form-label File Type
+                            select.form-control#ddlFileType
+                                option(value='1') Training Phrase
+                                option(value='2') Entity
+                        .col-lg-6
+                            label(for='txtLanguageCode').form-label Language Code 
+                            input(type='text', placeholder='e.g. en').form-control#txtLanguageCode
+            .card-footer 
+                div.float-right
+                    button.btn.btn-primary Submit
+    #outputCard.card.mt-2.no-files
+        h4.card-header File Browser
+        .card-body 
+            .row#noFiles 
+                .col.text-center
+                    .alert.alert-primary 
+                        | There are currently no files that have been processed to display
+            .row#files
+                .col-lg-3
+                    ul.list-group.mb-2
+                        li.list-group-item
+                            .row
+                                .col-auto
+                                    h5 All Files
+                                .col.text-right
+                                    button#btnRemoveAllFiles.btn.btn-outline-danger(title='Remove all files')
+                                        i.fa.fa-trash
+                                    button#btnDownloadAllFiles.btn.btn-outline-primary.ml-2(title='Download all files as a zip')
+                                        i.fa.fa-download
+                    #lstFiles.list-group
+                .col-lg-9
+                    ul.list-group.mb-2
+                        li.list-group-item
+                            .row
+                                .col-auto
+                                    h5#fileName filename.json
+                                .col.text-right
+                                    button#btnRemoveSelectedFile.btn.btn-outline-danger(title='Remove this file')
+                                        i.fa.fa-trash
+                                    button#btnDownloadSelectedFile.btn.btn-outline-primary.ml-2(title='Download this file')
+                                        i.fa.fa-download
+                    textarea(rows='10')#txtFileContents.form-control
+
+block scripts
+    script(src='/js/lib/FileSaver/FileSaver.min.js')
+    script(src='/js/lib/jszip/jszip.min.js')
+    script(src='/js/dialogFlowConverter.js')

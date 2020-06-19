@@ -10,11 +10,26 @@ var debug = require('debug')('idanscott.co.uk:server');
 var http = require('http');
 var https = require('https');
 require('dotenv').config();
-var privateKey = fs.readFileSync(process.env.SSL_PRIVATE_KEY_PATH || 'sslcert/privkey.pem', 'utf8');
-var certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH || 'sslcert/cert.pem', 'utf8');
-var chain = fs.readFileSync(process.env.SSL_CHAIN_PATH || 'sslcert/chain.pem', 'utf8');
 
-var credentials = {key: privateKey, cert: certificate, ca: chain};
+var privateKey = null; 
+if (process.env.SSL_PRIVATE_KEY_PATH) {
+  privateKey = fs.readFileSync(process.env.SSL_PRIVATE_KEY_PATH, 'utf8');
+}
+
+var certificate = null;
+if (process.env.SSL_CERTIFICATE_PATH) { 
+  certificate = fs.readFileSync(process.env.SSL_CERTIFICATE_PATH, 'utf8');
+}
+
+var chain = null;
+if (process.env.SSL_CHAIN_PATH) { 
+  chain = fs.readFileSync(process.env.SSL_CHAIN_PATH, 'utf8');
+}
+
+var credentials = null; 
+if (privateKey && certificate && ca) {
+  credentials = {key: privateKey, cert: certificate, ca: chain};
+}
 
 /**
  * Get port from environment and store in Express.
@@ -31,20 +46,28 @@ app.set('httpsPort', httpsPort);
  */
 
 var httpServer = http.createServer(app);
-var httpsServer = https.createServer(credentials, app);
+
+var httpsServer = null;
+if (credentials) {
+  httpsServer = https.createServer(credentials, app);
+}  
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
+ 
+if (httpsServer) {
+  httpsServer.listen(httpsPort);
+  httpsServer.on('error', onError);
+  httpsServer.on('listening', onListening);
+}
+
 httpServer.listen(httpPort);
-httpsServer.listen(httpsPort);
 
 httpServer.on('error', onError);
-httpsServer.on('error', onError);
 
 httpServer.on('listening', onListening);
-httpsServer.on('listening', onListening);
 
 /**
  * Normalize a port into a number, string, or false.

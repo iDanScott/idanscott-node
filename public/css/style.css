@@ -64,3 +64,18 @@ span.dotnet {
 .smaller {
     font-size: 0.75rem;
 }
+
+#lstFiles a {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#outputCard.no-files #files {
+    display: none;
+}
+
+#outputCard:not(.no-files) #noFiles {
+    display: none;
+}
