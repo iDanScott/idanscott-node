@@ -28,6 +28,17 @@
         return valid;
     }
 
+    function getFileText(files) {
+        console.log(files);
+
+        var reader = new FileReader();
+        reader.addEventListener('load', function(e) {
+            txtInputJson.innerText = e.target.result;
+            document.getElementById('dlgFile').value = '';
+        });
+        reader.readAsText(files[0]);
+    }
+
     function download(filename, text) {
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -268,6 +279,10 @@
 
         document.getElementById('btnDownloadAllFiles').addEventListener('click', function() {
             downloadAllFiles();
+        });
+
+        document.getElementById('dlgFile').addEventListener('change', function(e) {
+            getFileText(e.target.files);
         });
     }
 
